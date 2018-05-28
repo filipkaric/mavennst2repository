@@ -10,5 +10,5 @@
         <property name="URL" value="jdbc:mysql://localhost:3306/bazaplanishrane?zeroDateTimeBehavior=convertToNull"/>
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
-    <jdbc-resource enabled="true" jndi-name="java:app/bazapi" object-type="user" pool-name="mysql_bazaplanishrane_adminPool"/>
+    <jdbc-resource enabled="true" jndi-name="jdbc/filip" object-type="user" pool-name="mysql_bazaplanishrane_adminPool"/>
 </resources>
