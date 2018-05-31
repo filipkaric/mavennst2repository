@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./newTemplate.xhtml">
+
+            <ui:define name="top">
+                <h1>Ulogovani korisnik: #{mbKorisnik.korisnik.username} </h1>
+            </ui:define>
+
+            <ui:define name="left">
+                <h:form>          
+                    <p:growl id="messages" showDetail="false" />
+
+                    <p:commandButton id="dynaButton" value="Opcije" type="button" icon="ui-icon-extlink" />
+                    <p:tieredMenu overlay="true" trigger="dynaButton" my="left top" at="left bottom" style="width:200px">
+                        <p:submenu label="Članovi" icon="ui-icon-extlink">
+                            <p:menuitem value="Unos novog člana"  icon="ui-icon-disk" action="unosClana?faces-redirect=true"/>
+                            <p:menuitem value="Prikaz svih članova"  icon="ui-icon-arrowrefresh-1-w" action="sviClanovi?faces-redirect=true"/>
+                        </p:submenu>
+                        <p:submenu label="Rad sa planovima ishrane" icon="ui-icon-extlink">
+                            <p:menuitem value="Unos plana ishrane"  icon="ui-icon-disk" action="unosPlanaIshrane?faces-redirect=true"/>
+                            <p:menuitem value="Prikaz svih planova isrhane" icon="ui-icon-arrowrefresh-1-w" action="prikazSvihPlanovaIshrane?faces-redirect=true"/>
+                        </p:submenu>
+                        <p:submenu label="Rad sa jelima" icon="ui-icon-extlink">
+                            <p:menuitem value="Prikaz svih jela" icon="ui-icon-arrowrefresh-1-w" action="prikazSvihJela?faces-redirect=true"/>
+                        </p:submenu>
+                        <p:submenu label="Ostalo" icon="ui-icon-extlink" >
+                            <p:menuitem value="Izloguj se" icon="ui-icon-arrowrefresh-1-w" action="#{mbKorisnik.logout()}"/>
+                        </p:submenu>
+                    </p:tieredMenu>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                    <f:metadata>
+                        <f:event type="preRenderView" listener="#{mbUnosClana.onload}"/>
+                    </f:metadata>
+                    <p:panel id="panel" header="Kreiranje novog člana">
+
+                        <h:panelGrid columns="3" cellpadding="10">
+                            <h:outputLabel for="sifraClana" value="Šifra člana:  *"  style="font-weight:bold; color: black"/>
+                            <h:inputText id="sifraClana" 
+                                         value="#{mbUnosClana.clan.sifraClana}" 
+                                         required="true" 
+                                         label="Šifra člana"
+                                         requiredMessage="Unesite šifru člana!">
+                            </h:inputText>
+                            <h:message for="sifraClana" style="color: red"/>
+
+                            <p:outputLabel for="imePrezime" value="Ime i prezime: "  style="font-weight:bold; color: black"/>
+                            <h:inputText id="imePrezime" 
+                                         value="#{mbUnosClana.clan.imePrezime}" 
+                                         required="true" 
+                                         label="Ime i prezime"
+                                         requiredMessage="Unesite ime i prezime!"
+                                         validatorMessage="Od 2 do 50 karaktera!">
+                                <f:validateLength minimum="2" maximum="50"/>
+                            </h:inputText>
+                            <h:message for="imePrezime" style="color: red"/>
+
+                            <p:outputLabel for="godinaRodjenja" value="Godina rodjenja: "  style="font-weight:bold; color: black"/>
+                            <h:inputText id="godinaRodjenja" 
+                                         value="#{mbUnosClana.clan.godinaRodjenja}" 
+                                         required="true"
+                                         label="Godina rodjenja "
+                                         requiredMessage="Unesite godinu rodjenja!"
+                                         validatorMessage="Godina mora imati 4 karaktera">
+                                <f:validateLength minimum="4"  maximum="4"/>
+                            </h:inputText>
+                            <h:message for="godinaRodjenja" style="color: red"/>
+                            
+                            <h:outputLabel value="Plan ishrane : *" style="font-weight:bold; color: black" />
+                            <p:selectOneMenu value="#{mbUnosClana.clan.sifraPlanaIshrane}"  converter="planIshraneCNV">
+                                <f:selectItems  value="#{mbUnosClana.planoviIshrane}"
+                                                var="pi" itemLabel="#{pi.nazivPlanaIshrane}" itemValue="#{pi}"
+                                                />
+                            </p:selectOneMenu>
+                            <br/>
+                            
+                            <p:outputLabel for="visinaUMetrima" value="Visina (m): "  style="font-weight:bold; color: black"/>
+                            <h:inputText id="visinaUMetrima" 
+                                         value="#{mbUnosClana.clan.visinaUMetrima}" 
+                                         required="false"
+                                         label="Visina u metrima "
+                                         validatorMessage="Unesite visinu u formatu #.##!">
+                                <f:validateLength minimum="3"  maximum="4"/>
+                            </h:inputText>
+                            <h:message for="visinaUMetrima" style="color: red"/>
+                            
+                            <p:outputLabel for="tezinaUKg" value="Težina (kg): "  style="font-weight:bold; color: black"/>
+                            <h:inputText id="tezinaUKg" 
+                                         value="#{mbUnosClana.clan.tezinaUKg}" 
+                                         required="false"
+                                         label="Težina u metrima "
+                                         validatorMessage="Unesite težinu u od 10 do 999kg!">
+                                <f:validateLength minimum="2"  maximum="3"/>
+                            </h:inputText>
+                            <h:message for="tezinaUKg" style="color: red"/>
+                            
+                            <p:outputLabel for="napomena" value="Napomena: "  style="font-weight:bold; color: black"/>
+                            <h:inputText id="napomena" 
+                                         value="#{mbUnosClana.clan.napomena}" 
+                                         required="false"
+                                         label="Napomena "
+                                         validatorMessage="Napomena ne može biti duža od 100 karaktera!">
+                                <f:validateLength minimum="2"  maximum="100"/>
+                            </h:inputText>
+                            <h:message for="napomena" style="color: red"/>
+                            
+                        </h:panelGrid>
+                        <h:commandButton value="Sacuvaj" action="#{mbUnosClana.persistClan()}"/>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

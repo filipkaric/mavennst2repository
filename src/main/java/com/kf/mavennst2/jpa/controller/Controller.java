@@ -7,6 +7,7 @@ package com.kf.mavennst2.jpa.controller;
 
 import com.kf.mavennst2.domen.Korisnik;
 import com.kf.mavennst2.domen.PlanIshrane;
+import com.kf.mavennst2.domen.Clan;
 import com.kf.mavennst2.jpa.dbb.DBBroker;
 import java.util.List;
 
@@ -34,6 +35,9 @@ public class Controller {
     public PlanIshrane findPlanIshraneBySifra(String sifra){
        return DBBroker.getInstance().findPlanIshraneBySifra(sifra);
     }
+   public PlanIshrane findPlanIshraneByNaziv(String naziv) {
+       return DBBroker.getInstance().findPlanIshraneByNaziv(naziv);
+    }
     
     public void persistPlanIshrane(PlanIshrane planIshrane){
         DBBroker.getInstance().persistPlanIshrane(planIshrane);
@@ -41,5 +45,13 @@ public class Controller {
     
     public void deletePlanIshraneBySifra(PlanIshrane planIshrane){
         DBBroker.getInstance().deletePlanIshraneBySifra(planIshrane);
+    }
+    
+    public void persistClan(Clan clan){
+        DBBroker.getInstance().persistClan(clan);
+    }
+
+    public List<Clan> findAllClan() {
+        return DBBroker.getInstance().findAllClan();
     }
 }

@@ -5,6 +5,7 @@
  */
 package com.kf.mavennst2.jpa.dbb;
 
+import com.kf.mavennst2.domen.Clan;
 import com.kf.mavennst2.domen.Korisnik;
 import com.kf.mavennst2.domen.PlanIshrane;
 import java.util.List;
@@ -61,6 +62,18 @@ public class DBBroker {
         return planIshrane;
     }
     
+    public PlanIshrane findPlanIshraneByNaziv(String naziv) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nst_filip");
+        EntityManager em = emf.createEntityManager();
+        
+        PlanIshrane planIshrane = (PlanIshrane) em.createQuery("SELECT p FROM PlanIshrane p WHERE p.nazivPlanaIshrane = :nazivPlanaIshrane")
+                .setParameter("nazivPlanaIshrane", naziv).getSingleResult();
+        
+        em.close();
+        emf.close();
+        return planIshrane;
+    }
+    
     public void persistPlanIshrane(PlanIshrane planIshrane){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("nst_filip");
         EntityManager em = emf.createEntityManager();
@@ -82,6 +95,27 @@ public class DBBroker {
         em.getTransaction().commit();
         em.close();
         emf.close();
+    }
+//    Clan Clan Clan
+    public void persistClan(Clan clan) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nst_filip");
+        EntityManager em = emf.createEntityManager();
+        
+        em.getTransaction().begin();
+        em.persist(clan);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+    }
+
+    public List<Clan> findAllClan() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nst_filip");
+        EntityManager em = emf.createEntityManager();
+        
+        List<Clan> list = em.createQuery("SELECT c FROM Clan c").getResultList();
+        em.close();
+        emf.close();
+        return list;
     }
     
 }

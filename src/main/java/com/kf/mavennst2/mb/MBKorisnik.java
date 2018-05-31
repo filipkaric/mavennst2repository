@@ -48,13 +48,18 @@ public class MBKorisnik implements Serializable{
             System.out.println("Korisnik: korisnicko ime:" + korisnik.getUsername() + ", korisnicka sifra:" + korisnik.getPassword());
             korisnik = Controller.getInstance().logIn(korisnik);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Korisnik je uspesno prijavljen.", null));
-            return "fica.xhtml";
+            return "prva.xhtml";
         } catch (Exception ex) {
             Logger.getLogger(MBKorisnik.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sistem ne moze da nadje korisnika na osnovu unetih vrednosti", null));
         }
         return "";
+    }
+    
+    public String logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "/index.xhtml?faces-redirect=true";
     }
     
 }
