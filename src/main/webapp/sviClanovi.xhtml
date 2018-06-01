@@ -43,7 +43,7 @@
                     <f:metadata>
                         <f:event type="preRenderView" listener="#{mbClan.onload}"/>
                     </f:metadata>
-                    <p:dataTable var="clan" value="#{mbClan.clanovi}">
+                    <p:dataTable id="tabela" var="clan" value="#{mbClan.clanovi}">
                         <f:facet name="header">
                             <p:outputPanel>
                                 <h:outputText value="Sistem je pronasao članove" />
@@ -70,7 +70,10 @@
                         <p:column headerText="Plan ishrane">
                             <p:outputLabel value="#{clan.sifraPlanaIshrane.nazivPlanaIshrane}"/>      
                         </p:column>  
-                        
+                        <p:column headerText="Obrisi člana">
+                             <p:growl id="message" showDetail="false" />
+                             <p:commandButton update="tabela" id="obrisi1"  value="Obrisi" actionListener="#{mbClan.obrisi(clan)}"/>
+                        </p:column>
                     </p:dataTable>
 
                 </h:form>

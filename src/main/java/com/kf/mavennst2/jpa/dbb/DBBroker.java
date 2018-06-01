@@ -6,6 +6,7 @@
 package com.kf.mavennst2.jpa.dbb;
 
 import com.kf.mavennst2.domen.Clan;
+import com.kf.mavennst2.domen.Jelo;
 import com.kf.mavennst2.domen.Korisnik;
 import com.kf.mavennst2.domen.PlanIshrane;
 import java.util.List;
@@ -116,6 +117,40 @@ public class DBBroker {
         em.close();
         emf.close();
         return list;
+    }
+
+    public List<Jelo> findAllJelo() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nst_filip");
+        EntityManager em = emf.createEntityManager();
+        
+        List<Jelo> list = em.createQuery("SELECT j FROM Jelo j").getResultList();
+        em.close();
+        emf.close();
+        return list;
+    }
+
+    public Jelo findJeloByNaziv(String naziv) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nst_filip");
+        EntityManager em = emf.createEntityManager();
+        
+        Jelo jelo = (Jelo) em.createQuery("SELECT j FROM Jelo j WHERE j.nazivJela = :nazivJela")
+                .setParameter("nazivJela", naziv).getSingleResult();
+        
+        em.close();
+        emf.close();
+        return jelo;
+    }
+
+    public void delete(Clan clan) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("nst_filip");
+        EntityManager em = emf.createEntityManager();
+        
+        Clan c = em.find(Clan.class, clan.getSifraClana());
+        em.getTransaction().begin();
+        em.remove(c);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
     }
     
 }

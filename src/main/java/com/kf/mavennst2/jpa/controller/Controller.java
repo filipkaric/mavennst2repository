@@ -8,6 +8,7 @@ package com.kf.mavennst2.jpa.controller;
 import com.kf.mavennst2.domen.Korisnik;
 import com.kf.mavennst2.domen.PlanIshrane;
 import com.kf.mavennst2.domen.Clan;
+import com.kf.mavennst2.domen.Jelo;
 import com.kf.mavennst2.jpa.dbb.DBBroker;
 import java.util.List;
 
@@ -53,5 +54,17 @@ public class Controller {
 
     public List<Clan> findAllClan() {
         return DBBroker.getInstance().findAllClan();
+    }
+
+    public List<Jelo> findAllJelo() {
+        return DBBroker.getInstance().findAllJelo();
+    }
+
+    public Jelo findJeloByNaziv(String naziv) {
+        return DBBroker.getInstance().findJeloByNaziv(naziv);
+    }
+
+    public void deleteClan(Clan clan) {
+        DBBroker.getInstance().delete(clan);
     }
 }
