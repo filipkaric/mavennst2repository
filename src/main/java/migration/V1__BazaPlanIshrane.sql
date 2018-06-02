@@ -10,7 +10,6 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -41,7 +40,7 @@ CREATE TABLE `clan` (
 --
 
 INSERT INTO `clan` (`SifraClana`, `ImePrezime`, `GodinaRodjenja`, `VisinaUMetrima`, `TezinaUKg`, `Napomena`, `SifraPlanaIshrane`) VALUES
-('Aleksandar Mikic19741.7366.3', 'Aleksandar Miki?', 1974, 1.73, 66.3, 'Nema', 'filip1498422162560Srpski reÅ¾im'),
+('Aleksandar Mikic19741.7366.3', 'Aleksandar Mikic', 1974, 1.73, 66.3, 'Nema', 'filip1498422162560Srpski reÅ¾im'),
 ('Boda Tajson19672.0120.0', 'Boda Tajson', 1967, 2, 120, 'Nema', 'filip1498422384810Slimsuper'),
 ('DuÅ¡ko DugouÅ¡ko19401.730.0', 'DuÅ¡ko DugouÅ¡ko', 1940, 1.7, 30, 'Inace je niÅ¾i ali je zahtevao da uracunam i uÅ¡i u visinu', 'filip1498422384810Slimsuper'),
 ('Jadranka Savic19232.0120.0', 'Jadranka Savic', 1923, 2, 120, 'Gospodja puca od zdravlja', 'filip1498422162560Srpski reÅ¾im'),
@@ -49,7 +48,7 @@ INSERT INTO `clan` (`SifraClana`, `ImePrezime`, `GodinaRodjenja`, `VisinaUMetrim
 ('Marko Petrovic19901.880.0', 'Marko Petrovic', 1990, 1.8, 80, 'Dijabetes', 'filip1498422315342Superslim'),
 ('Milica Maric19931.763.0', 'Milica Maric', 1993, 1.7, 63, 'Nema napomene', 'filip1498422162560Srpski reÅ¾im'),
 ('Petar Peric19941.8980.0', 'Petar Peric', 1994, 1.89, 80, 'Nema', 'filip1498422384810Slimsuper'),
-('Petra MiloÅ¡evi?19781.8268.0', 'Petra MiloÅ¡evi?', 1978, 1.82, 68, 'Nema', 'filip1498422384810Slimsuper');
+('Petra MiloÅ¡evic19781.8268.0', 'Petra MiloÅ¡evic', 1978, 1.82, 68, 'Nema', 'filip1498422384810Slimsuper');
 
 -- --------------------------------------------------------
 
@@ -199,7 +198,7 @@ INSERT INTO `tipjela` (`SifraTipaJela`, `NazivTipaJela`) VALUES
 ('3', 'ÄŒorba'),
 ('4', 'Supa'),
 ('5', 'Salata'),
-('6', 'SendviÄ'),
+('6', 'Sendvic'),
 ('7', 'Dezert'),
 ('8', 'Ostalo'),
 ('9', 'PiÄ‡e');
