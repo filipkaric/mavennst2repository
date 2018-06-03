@@ -1,16 +1,74 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <body>
-        <div>TODO write content</div>
+
+        <ui:composition template="./newTemplate.xhtml">
+
+            <ui:define name="left">
+                <h:form>          
+                    <p:growl id="messages" showDetail="false" />
+
+                    <p:commandButton id="dynaButton" value="Opcije" type="button" icon="ui-icon-extlink" />
+                    <p:tieredMenu overlay="true" trigger="dynaButton" my="left top" at="left bottom" style="width:200px">
+                        <p:submenu label="Članovi" icon="ui-icon-extlink">
+                            <p:menuitem value="Unos novog člana"  icon="ui-icon-disk" action="unosClana?faces-redirect=true"/>
+                            <p:menuitem value="Prikaz svih članova"  icon="ui-icon-arrowrefresh-1-w" action="sviClanovi?faces-redirect=true"/>
+                        </p:submenu>
+                        <p:submenu label="Rad sa planovima ishrane" icon="ui-icon-extlink">
+                            <p:menuitem value="Unos plana ishrane"  icon="ui-icon-disk" action="unosPlanaIshrane?faces-redirect=true"/>
+                            <p:menuitem value="Prikaz svih planova"  icon="ui-icon-disk" action="prikazSvihPlanovaIshrane?faces-redirect=true"/>
+                        </p:submenu>
+                        <p:submenu label="Rad sa jelima" icon="ui-icon-extlink">
+                            <p:menuitem value="Prikaz svih jela" icon="ui-icon-arrowrefresh-1-w" action="prikazSvihJela?faces-redirect=true"/>
+                        </p:submenu>
+                        <p:submenu label="Ostalo" icon="ui-icon-extlink" >
+                            <p:menuitem value="Izloguj se" icon="ui-icon-arrowrefresh-1-w" action="#{mbKorisnik.logout()}"/>
+                        </p:submenu>
+                    </p:tieredMenu>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                     <f:metadata>
+                         <f:event type="preRenderView" listener="#{mbClan.onload}"/>
+                    </f:metadata>
+                    <p:dataTable var="clan" value="#{mbPlanIshrane.listaClanova}">
+                        <f:facet name="header">
+                            #{mbPlanIshrane.planIshrane.nazivPlanaIshrane}
+                            Size of list #{mbPlanIshrane.listaClanova.size()}
+                        </f:facet>
+                        <p:column headerText="Šifra" sortBy="#{clan.sifraClana}" filterBy="#{clan.sifraClana}">
+                            <p:outputLabel value="#{clan.sifraClana}"/>
+                        </p:column>
+                        <p:column headerText="Ime i prezime" sortBy="#{clan.imePrezime}" filterBy="#{clan.imePrezime}">
+                            <p:outputLabel value="#{clan.imePrezime}"/>
+                        </p:column>
+                        <p:column headerText="Godina rodjenja" sortBy="#{clan.godinaRodjenja}" filterBy="#{clan.godinaRodjenja}">
+                            <p:outputLabel value="#{clan.godinaRodjenja}"/>
+                        </p:column>
+                        <p:column headerText="Visina(m)" sortBy="#{clan.visinaUMetrima}" filterBy="#{clan.visinaUMetrima}">
+                            <p:outputLabel value="#{clan.visinaUMetrima}"/>
+                        </p:column>
+                        <p:column headerText="Težina(kg)" sortBy="#{clan.tezinaUKg}" filterBy="#{clan.tezinaUKg}">
+                            <p:outputLabel value="#{clan.tezinaUKg}"/>
+                        </p:column>
+                        <p:column headerText="Napomena" sortBy="#{clan.napomena}" filterBy="#{clan.napomena}">
+                            <p:outputLabel value="#{clan.napomena}"/>      
+                        </p:column> 
+
+                    </p:dataTable>
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
     </body>
 </html>

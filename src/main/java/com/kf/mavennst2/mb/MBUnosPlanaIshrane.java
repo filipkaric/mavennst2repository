@@ -115,5 +115,4 @@ public class MBUnosPlanaIshrane implements Serializable{
         stavke.remove(s);
     }
     
-    
 }

@@ -13,6 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -62,5 +63,4 @@ public class MBClan implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sistem ne moze da obrise clana."));
         }
     }
-
 }

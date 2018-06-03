@@ -7,10 +7,12 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
+        <h:messages globalOnly="true"/>
+
         <ui:composition template="./newTemplate.xhtml">
 
             <ui:define name="top">
-                
+
             </ui:define>
 
             <ui:define name="left">
@@ -25,6 +27,7 @@
                         </p:submenu>
                         <p:submenu label="Rad sa planovima ishrane" icon="ui-icon-extlink">
                             <p:menuitem value="Unos plana ishrane"  icon="ui-icon-disk" action="unosPlanaIshrane?faces-redirect=true"/>
+                            <p:menuitem value="Prikaz svih planova"  icon="ui-icon-disk" action="prikazSvihPlanovaIshrane?faces-redirect=true"/>
                         </p:submenu>
                         <p:submenu label="Rad sa jelima" icon="ui-icon-extlink">
                             <p:menuitem value="Prikaz svih jela" icon="ui-icon-arrowrefresh-1-w" action="prikazSvihJela?faces-redirect=true"/>
@@ -43,34 +46,34 @@
                     <f:metadata>
                         <f:event type="preRenderView" listener="#{mbPlanIshrane.onload}"/>
                     </f:metadata>
-                    <p:dataTable var="planishrane" value="#{mbPlanIshrane.lista}">
+                    <p:dataTable id="tabela" value="#{mbPlanIshrane.lista}" var="planishrane" >
                         <f:facet name="header">
                             <p:outputPanel>
                                 <h:outputText value="Sistem je pronasao planove" />
                             </p:outputPanel>
                         </f:facet>
-                        <p:column headerText="Šifra" sortBy="#{planishrane.sifraPlanaIshrane}" filterBy="#{planishrane.sifraPlanaIshrane}">
+                        <p:column headerText="Šifra plana ishrane" sortBy="#{planishrane.sifraPlanaIshrane}" filterBy="#{planishrane.sifraPlanaIshrane}">
                             <p:outputLabel value="#{planishrane.sifraPlanaIshrane}"/>
                         </p:column>
-                        <p:column headerText="Naziv" sortBy="#{planishrane.nazivPlanaIshrane}" filterBy="#{planishrane.nazivPlanaIshrane}">
+                        <p:column headerText="Naziv plana ishrane" sortBy="#{planishrane.nazivPlanaIshrane}" filterBy="#{planishrane.nazivPlanaIshrane}">
                             <p:outputLabel value="#{planishrane.nazivPlanaIshrane}"/>
                         </p:column>
                         <p:column headerText="Datum kreiranja">
                             <p:calendar id="calendar" value="#{planishrane.datumNastankaPlana}" pattern="dd.MM.yyyy" mask="true" showOn="none" readonly="true" />
                         </p:column>
-                        <p:column headerText="Napomena" sortBy="#{planishraneishrane.napomena}" filterBy="#{planishrane.napomena}">
+                        <p:column headerText="Napomena plana" sortBy="#{planishrane.napomena}" filterBy="#{planishrane.napomena}">
                             <p:outputLabel value="#{planishrane.napomena}"/>
                         </p:column>
-                        
                         <p:column headerText="Stavke" >
                             <h:commandLink value="Stavke" action="#{mbPlanIshrane.vratiStavke(planishrane)}"/>
                         </p:column>
                         <p:column headerText="Clanovi" >
                             <h:commandLink value="Clanovi" action="#{mbPlanIshrane.vratiClanove(planishrane)}"/>
                         </p:column>
-                        
+                        <f:facet name="footer">
+                            In total there are #{mbPlanIshrane.lista.size()} diets.
+                        </f:facet>
                     </p:dataTable>
-
                 </h:form>
             </ui:define>
 
