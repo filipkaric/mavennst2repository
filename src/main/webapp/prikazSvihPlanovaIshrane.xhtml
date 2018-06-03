@@ -64,14 +64,14 @@
                         <p:column headerText="Napomena plana" sortBy="#{planishrane.napomena}" filterBy="#{planishrane.napomena}">
                             <p:outputLabel value="#{planishrane.napomena}"/>
                         </p:column>
-                        <p:column headerText="Stavke" >
+<!--                        <p:column headerText="Stavke" >
                             <h:commandLink value="Stavke" action="#{mbPlanIshrane.vratiStavke(planishrane)}"/>
                         </p:column>
                         <p:column headerText="Clanovi" >
                             <h:commandLink value="Clanovi" action="#{mbPlanIshrane.vratiClanove(planishrane)}"/>
-                        </p:column>
+                        </p:column>-->
                         <f:facet name="footer">
-                            In total there are #{mbPlanIshrane.lista.size()} diets.
+                            Ukoupno ima #{mbPlanIshrane.lista.size()} planova ishrane.
                         </f:facet>
                     </p:dataTable>
                 </h:form>
